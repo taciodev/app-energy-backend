@@ -5,8 +5,11 @@ import { ElectronicDevicesRepository } from "@/interfaces/electronic-devices.int
 export class PrismaElectronicDevicesRepository implements ElectronicDevicesRepository {
     async create(data: Prisma.ElectronicDeviceUncheckedCreateInput): Promise<ElectronicDevice> {
         const user = await prisma.electronicDevice.create({ data });
-
         return user;
+    }
+    async findAllElectronicDevices(userId: string): Promise<ElectronicDevice[]> {
+        const electronicDevices = await prisma.electronicDevice.findMany({ where: { userId } });
+        return electronicDevices;
     }
 }
 

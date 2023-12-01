@@ -1,8 +1,9 @@
 import { FastifyInstance } from 'fastify'
 import { create } from './create.controller'
-import { getAllResources } from './getAllResources.controller'
+import { findAllElectronicDevices } from './findAll.controller'
 
-export async function appRoutes(app: FastifyInstance) {
-  app.post('/devices', create)
-  app.get('/devices', getAllResources)
+export async function electronicDevicesRoutes(app: FastifyInstance) {
+  // app.addHook("preHandler", authMiddleware)
+  app.post('/:userId', create)
+  app.get('/:userId', findAllElectronicDevices)
 }

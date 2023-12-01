@@ -1,4 +1,4 @@
-import { Prisma, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { UsersRepository } from "@/interfaces/users.interface";
 import { PrismaUsersRepository } from "@/repositories/users.repository";
 
@@ -8,7 +8,7 @@ export class UsersUseCase {
     this.userRepository = new PrismaUsersRepository();
   }
 
-  async create({ name, email }: Prisma.UserCreateInput): Promise<User> {
+  async create({ name, email }: Prisma.UserCreateInput) {
     const verifyIfUserExists = await this.userRepository.findByEmail(email);
     
     if (verifyIfUserExists) {
