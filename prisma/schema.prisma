@@ -14,8 +14,8 @@ model User {
   id               String             @id @default(uuid())
   name             String
   email            String
+  password_hash    String
   createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
   ElectronicDevice ElectronicDevice[]
 
   @@map("users")
@@ -23,6 +23,7 @@ model User {
 
 model ElectronicDevice {
   id               String @id @default(uuid())
+  icon             String
   name             String
   powerConsumption Int
 

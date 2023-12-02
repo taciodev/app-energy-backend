@@ -6,14 +6,15 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
+    password: z.string().min(6),
   });
 
-  const { name, email } = registerBodySchema.parse(request.body);
+  const { name, email, password } = registerBodySchema.parse(request.body);
 
   try {
       const usersUseCase = new UsersUseCase();
 
-      await usersUseCase.create({ name, email });
+      await usersUseCase.create({ name, email, password_hash: password });
   } catch(err) {
       return reply.status(400).send({ message: err });
   }
